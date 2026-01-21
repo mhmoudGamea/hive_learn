@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:hive_learn/data/models/word_model.dart';
+import 'package:hive_learn/data/models/word_hive_model.dart';
 import 'package:hive_learn/core/utils/hive_boxes_names.dart';
-
-import '../../data/models/word_type_adapter.dart';
 
 class HiveService {
   static Future<void> init() async {
@@ -16,19 +14,19 @@ class HiveService {
 
   /// Registers Hive adapters so custom models can be stored
   static void _registerAdapters() {
-    Hive.registerAdapter(WordTypeAdapter());
+    Hive.registerAdapter(WordHiveModelAdapter());
   }
 
   /// Opens Hive boxes with error handling, LazyBox loads data only when accessed
   static Future<void> _openBoxes() async {
     try {
-      await Hive.openLazyBox<WordModel>(HiveBoxesNames.userBox);
+      await Hive.openLazyBox<WordHiveModel>(HiveBoxesNames.userBox);
     } catch (error) {
       debugPrint("Hive error: $error");
     }
   }
 
   /// Provides access to the already opened WordModel box
-  static LazyBox<WordModel> get userBox =>
-      Hive.lazyBox<WordModel>(HiveBoxesNames.userBox);
+  static LazyBox<WordHiveModel> get userBox =>
+      Hive.lazyBox<WordHiveModel>(HiveBoxesNames.userBox);
 }
