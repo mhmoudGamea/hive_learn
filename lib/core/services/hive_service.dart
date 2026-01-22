@@ -20,13 +20,13 @@ class HiveService {
   /// Opens Hive boxes with error handling, LazyBox loads data only when accessed
   static Future<void> _openBoxes() async {
     try {
-      await Hive.openLazyBox<WordHiveModel>(HiveBoxesNames.userBox);
+      await Hive.openLazyBox<WordHiveModel>(HiveBoxesNames.wordBox);
     } catch (error) {
       debugPrint("Hive error: $error");
     }
   }
 
   /// Provides access to the already opened WordModel box
-  static LazyBox<WordHiveModel> get userBox =>
-      Hive.lazyBox<WordHiveModel>(HiveBoxesNames.userBox);
+  static LazyBox<WordHiveModel> get wordBox =>
+      Hive.lazyBox<WordHiveModel>(HiveBoxesNames.wordBox);
 }

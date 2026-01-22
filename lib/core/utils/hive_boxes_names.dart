@@ -1,5 +1,5 @@
 abstract class HiveBoxesNames {
   HiveBoxesNames._();
 
-  static const String userBox = 'user_box';
+  static const String wordBox = 'word_box';
 }
