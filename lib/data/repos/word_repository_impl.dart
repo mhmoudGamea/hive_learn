@@ -28,10 +28,19 @@ class WordRepositoryImpl implements WordRepository {
   @override
   Future<Either<Failure, void>> addWord(WordHiveModel word) async {
     try {
-      await box.add(word);
+      await box.put(word.index, word);
       return const Right(null);
     } catch (e) {
       return Left(CacheFailure('Failed to save word'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> deleteWord(int index) async {
+    try {
+      return box.delete(index).then((_) => const Right(null));
+    } catch (e) {
+      return Future.value(Left(CacheFailure('Failed to delete word')));
     }
   }
 }
