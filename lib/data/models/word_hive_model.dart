@@ -2,6 +2,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hive_learn/domain/entities/word_entity.dart';
 
 part 'word_hive_model.g.dart';
+
 @HiveType(typeId: 0)
 class WordHiveModel {
   @HiveField(0)
@@ -32,29 +33,29 @@ class WordHiveModel {
     this.englishExamples = const [],
   });
 
-  WordEntity toEntity() {
+  static WordEntity toEntity(WordHiveModel word) {
     return WordEntity(
-      index: index,
-      text: text,
-      isArabic: isArabic,
-      colorCode: colorCode,
-      arabicSimilarities: arabicSimilarities,
-      englishSimilarities: englishSimilarities,
-      arabicExamples: arabicExamples,
-      englishExamples: englishExamples,
+      index: word.index,
+      text: word.text,
+      isArabic: word.isArabic,
+      colorCode: word.colorCode,
+      arabicSimilarities: word.arabicSimilarities,
+      englishSimilarities: word.englishSimilarities,
+      arabicExamples: word.arabicExamples,
+      englishExamples: word.englishExamples,
     );
   }
 
-  // factory WordHiveModel.fromEntity(WordEntity word) {
-  //   return WordHiveModel(
-  //     index: word.index,
-  //     text: word.text,
-  //     isArabic: word.isArabic,
-  //     colorCode: word.colorCode,
-  //     arabicSimilarities: word.arabicSimilarities,
-  //     englishSimilarities: word.englishSimilarities,
-  //     arabicExamples: word.arabicExamples,
-  //     englishExamples: word.englishExamples,
-  //   );
-  // }
+  factory WordHiveModel.fromEntity(WordEntity word) {
+    return WordHiveModel(
+      index: word.index,
+      text: word.text,
+      isArabic: word.isArabic,
+      colorCode: word.colorCode,
+      arabicSimilarities: word.arabicSimilarities,
+      englishSimilarities: word.englishSimilarities,
+      arabicExamples: word.arabicExamples,
+      englishExamples: word.englishExamples,
+    );
+  }
 }

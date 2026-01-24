@@ -7,10 +7,10 @@ import '../models/word_hive_model.dart';
 class WordRepositoryImpl implements WordRepository {
   final LazyBox<WordHiveModel> box;
 
-  WordRepositoryImpl(this.box);
+  WordRepositoryImpl({required this.box});
 
   @override
-  Future<Either<Failure, List<WordHiveModel>>> getAllWords() async {
+  Future<Either<Failure, List<WordHiveModel>>> getWords() async {
     try {
       final words = <WordHiveModel>[];
 

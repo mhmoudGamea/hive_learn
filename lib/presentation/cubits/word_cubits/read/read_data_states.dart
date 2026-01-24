@@ -11,7 +11,7 @@ class ReadDataSuccess extends ReadDataState {
   ReadDataSuccess({required this.words});
 }
 
-class ReadDataFailure extends ReadDataState {
+class ReadDataError extends ReadDataState {
   final String message;
-  ReadDataFailure({required this.message});
+  ReadDataError({required this.message});
 }
