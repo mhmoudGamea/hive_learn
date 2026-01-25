@@ -26,7 +26,7 @@ class WordRepositoryImpl implements WordRepository {
   }
 
   @override
-  Future<Either<Failure, void>> addWord(WordHiveModel word) async {
+  Future<Either<Failure, void>> putWord(WordHiveModel word) async {
     try {
       await box.put(word.index, word);
       return const Right(null);
@@ -40,7 +40,21 @@ class WordRepositoryImpl implements WordRepository {
     try {
       return box.delete(index).then((_) => const Right(null));
     } catch (e) {
-      return Future.value(Left(CacheFailure('Failed to delete word')));
+      return Left(CacheFailure('Failed to delete word'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, WordHiveModel>> getSpecificWord(int index) async {
+    try {
+      final word = await box.get(index);
+      if (word != null) {
+        return Right(word);
+      } else {
+        return Left(CacheFailure('Word not found'));
+      }
+    } catch (error) {
+      return Left(CacheFailure('Failed to get specific word'));
     }
   }
 }

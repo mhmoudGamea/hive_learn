@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_learn/core/services/hive_service.dart';
+import 'package:hive_learn/core/styles/app_theme.dart';
 import 'package:hive_learn/injection.dart';
 import 'package:hive_learn/presentation/views/home/home_view.dart';
 
@@ -15,6 +16,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: HomeView());
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: AppTheme.lightTheme,
+      home: HomeView(),
+    );
   }
 }
