@@ -5,16 +5,26 @@ import 'package:hive_learn/data/models/word_hive_model.dart';
 import 'core/utils/hive_boxes_names.dart';
 import 'data/repos/word_repository_impl.dart';
 import 'domain/repos/word_repository.dart';
+import 'presentation/cubits/word_cubits/read/read_data_cubit.dart';
+import 'presentation/cubits/word_cubits/write/write_data_cubit.dart';
 
-final getIT = GetIt.instance;
+final getIt = GetIt.instance;
 Future<void> initGetIt() async {
   // HIVE BOXES
-  getIT.registerLazySingleton<LazyBox<WordHiveModel>>(
+  getIt.registerLazySingleton<LazyBox<WordHiveModel>>(
     () => Hive.lazyBox<WordHiveModel>(HiveBoxesNames.wordBox),
   );
 
   // REPOSITORIES
-  getIT.registerLazySingleton<WordRepository>(
-    () => WordRepositoryImpl(box: getIT<LazyBox<WordHiveModel>>()),
+  getIt.registerLazySingleton<WordRepository>(
+    () => WordRepositoryImpl(box: getIt<LazyBox<WordHiveModel>>()),
+  );
+
+  // CUBITS
+  getIt.registerFactory(
+    () => WriteDataCubit(repository: getIt<WordRepository>()),
+  );
+  getIt.registerFactory(
+    () => ReadDataCubit(repository: getIt<WordRepository>()),
   );
 }
