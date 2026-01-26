@@ -51,6 +51,7 @@ class _WordTextFormWidgetState extends State<WordTextFormWidget> {
         cursorColor: AppColors.white,
         controller: widget.controller,
         validator: _validator,
+        autofocus: true,
         minLines: 1,
         maxLines: 2,
         decoration: InputDecoration(

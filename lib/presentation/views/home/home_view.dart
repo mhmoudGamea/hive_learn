@@ -9,15 +9,21 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Home View')),
+      appBar: AppBar(
+        title: const Text(
+          'Home',
+          style: TextStyle(fontSize: 19, fontWeight: FontWeight.w500),
+        ),
+      ),
       body: HomeViewBody(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showDialog(context: context, builder: (_) => AddWordDialog());
         },
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
-        backgroundColor: AppColors.white,
-        child: const Icon(Icons.add, color: AppColors.secondaryColor),
+        backgroundColor: AppColors.secondaryColor,
+        elevation: 0,
+        child: const Icon(Icons.add, color: AppColors.white),
       ),
     );
   }

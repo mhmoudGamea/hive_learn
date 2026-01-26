@@ -7,19 +7,19 @@ abstract class AppTheme {
   AppTheme._();
 
   static final ThemeData lightTheme = ThemeData(
-    scaffoldBackgroundColor: AppColors.black,
+    scaffoldBackgroundColor: AppColors.white,
     brightness: Brightness.light,
     appBarTheme: const AppBarTheme(
-      backgroundColor: AppColors.black,
+      backgroundColor: AppColors.white,
       centerTitle: true,
       titleTextStyle: TextStyle(
-        color: Colors.white,
+        color: AppColors.secondaryColor,
         fontSize: 23,
         fontWeight: FontWeight.w600,
       ),
       systemOverlayStyle: SystemUiOverlayStyle(
-        statusBarColor: AppColors.black,
-        statusBarIconBrightness: Brightness.light,
+        statusBarColor: AppColors.white,
+        statusBarIconBrightness: Brightness.dark,
       ),
     ),
     textSelectionTheme: TextSelectionThemeData(

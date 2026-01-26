@@ -31,7 +31,7 @@ class WordRepositoryImpl implements WordRepository {
       await box.put(word.index, word);
       return const Right(null);
     } catch (e) {
-      return Left(CacheFailure('Failed to save word'));
+      return Left(CacheFailure(e.toString()));
     }
   }
 

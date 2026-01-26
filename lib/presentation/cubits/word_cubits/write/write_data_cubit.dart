@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_learn/data/models/word_hive_model.dart';
@@ -27,7 +29,7 @@ class WriteDataCubit extends Cubit<WriteDataState> {
     emit(WriteDataLoading());
 
     final entity = WordEntity(
-      index: DateTime.now().millisecondsSinceEpoch,
+      index: DateTime.now().millisecondsSinceEpoch % 0xFFFFFFFF,
       text: text,
       colorCode: colorCode,
       isArabic: isArabic,
@@ -122,11 +124,12 @@ class WriteDataCubit extends Cubit<WriteDataState> {
 
   Future<void> _saveEntity(WordEntity entity) async {
     final model = WordHiveModel.fromEntity(entity);
+    log('index => ${model.index}');
 
     final result = await repository.putWord(model);
-    result.fold(
-      (failure) => emit(WriteDataError(message: failure.message)),
-      (_) => emit(WriteDataSuccess()),
-    );
+    result.fold((failure) {
+      log('Fail => ${failure.message}');
+      emit(WriteDataError(message: failure.message));
+    }, (_) => emit(WriteDataSuccess()));
   }
 }

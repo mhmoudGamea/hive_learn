@@ -1,7 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_learn/core/styles/app_colors.dart';
 import 'package:hive_learn/presentation/cubits/word_cubits/write/write_data_cubit.dart';
 import 'package:hive_learn/presentation/cubits/word_cubits/write/write_data_states.dart';
 import 'package:hive_learn/presentation/widgets/button_widget.dart';
@@ -24,7 +23,16 @@ class _AddWordDialogState extends State<AddWordDialog> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<WriteDataCubit, WriteDataState>(
+    return BlocConsumer<WriteDataCubit, WriteDataState>(
+      listener: (context, state) {
+        if (state is WriteDataSuccess) {
+          Navigator.pop(context);
+        }
+
+        if (state is WriteDataError) {
+          ScaffoldMessenger.of(context).showSnackBar(_getSnackbar(state));
+        }
+      },
       builder: (_, state) {
         return Dialog(
           clipBehavior: Clip.antiAlias,
@@ -67,10 +75,13 @@ class _AddWordDialogState extends State<AddWordDialog> {
                   child: ButtonWidget(
                     text: 'Done',
                     textColor: _selectedColor,
-                    onPressed: () {
+                    isLoading: state is WriteDataLoading,
+                    onPressed: () async {
                       if (formKey.currentState!.validate()) {
-                        log(
-                          'New Word: ${controller.text}, Language: $_selectedLanguage, Color: ${_selectedColor}',
+                        await WriteDataCubit.get(context).addWord(
+                          text: controller.text,
+                          colorCode: _selectedColor.value,
+                          isArabic: _selectedLanguage == 'Ar',
                         );
                       }
                     },
@@ -81,6 +92,16 @@ class _AddWordDialogState extends State<AddWordDialog> {
           ),
         );
       },
+    );
+  }
+
+  SnackBar _getSnackbar(WriteDataError state) {
+    return SnackBar(
+      content: Text(
+        state.message,
+        style: TextStyle(fontSize: 17, fontWeight: FontWeight.w300),
+      ),
+      backgroundColor: AppColors.red,
     );
   }
 }
