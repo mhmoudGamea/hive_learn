@@ -20,14 +20,17 @@ class ReadDataCubit extends Cubit<ReadDataState> {
 
   void updateLanguageFilter(LanguageFilter filter) {
     languageFilter = filter;
+    getWords();
   }
 
   void updateSortedBy(SortedBy filter) {
     sortedBy = filter;
+    getWords();
   }
 
   void updateSortingOrder(SortingOrder filter) {
     sortingOrder = filter;
+    getWords();
   }
 
   void getWords() async {

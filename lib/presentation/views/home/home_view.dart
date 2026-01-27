@@ -9,15 +9,9 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Home',
-          style: TextStyle(fontSize: 19, fontWeight: FontWeight.w500),
-        ),
-      ),
-      body: HomeViewBody(),
+      body: SafeArea(child: HomeViewBody()),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
+        onPressed: () async {
           showDialog(context: context, builder: (_) => AddWordDialog());
         },
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),

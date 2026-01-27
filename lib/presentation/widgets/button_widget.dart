@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_learn/core/styles/app_colors.dart';
-import 'package:hive_learn/presentation/widgets/circle_loading.dart';
+import 'package:hive_learn/presentation/widgets/animated_dot_loading.dart';
 
 class ButtonWidget extends StatelessWidget {
   const ButtonWidget({
@@ -26,7 +26,7 @@ class ButtonWidget extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
       onPressed: onPressed,
-      child: isLoading == true ? CircleLoading() : Text(text),
+      child: isLoading == true ? AnimatedDotLoading() : Text(text),
     );
   }
 }

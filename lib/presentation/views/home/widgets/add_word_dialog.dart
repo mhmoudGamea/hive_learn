@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_learn/core/styles/app_colors.dart';
+import 'package:hive_learn/presentation/cubits/word_cubits/read/read_data_cubit.dart';
 import 'package:hive_learn/presentation/cubits/word_cubits/write/write_data_cubit.dart';
 import 'package:hive_learn/presentation/cubits/word_cubits/write/write_data_states.dart';
 import 'package:hive_learn/presentation/widgets/button_widget.dart';
@@ -27,6 +28,7 @@ class _AddWordDialogState extends State<AddWordDialog> {
       listener: (context, state) {
         if (state is WriteDataSuccess) {
           Navigator.pop(context);
+          ReadDataCubit.get(context).getWords();
         }
 
         if (state is WriteDataError) {

@@ -13,7 +13,7 @@ abstract class AppTheme {
       backgroundColor: AppColors.white,
       centerTitle: true,
       titleTextStyle: TextStyle(
-        color: AppColors.secondaryColor,
+        color: AppColors.black,
         fontSize: 23,
         fontWeight: FontWeight.w600,
       ),
